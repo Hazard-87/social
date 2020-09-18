@@ -1,0 +1,31 @@
+.body {
+    background-color: #fdfdfd;
+}
+.wrap {
+    width: 220px;
+    height: 260px;
+    background-color: #d9d9d9;
+    margin: 0 0 0 290px;
+    padding: 20px 50px;
+}
+h2 {
+    text-align: center;
+    margin-bottom: 40px;
+}
+
+.input {
+    margin: 10px 10px 20px 10px;
+    border-radius: 3px;
+    border: none;
+    height: 20px;
+    font-size: 14px;
+}
+
+.login {
+    width: 100px;
+    height: 25px;
+    margin: 10px 50px;
+}
+.checkbox {
+    margin-left: 10px;
+}

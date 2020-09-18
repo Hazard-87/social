@@ -1,0 +1,111 @@
+.bodyArt {
+    position: absolute;
+}
+
+.body {
+    position: relative;
+    display: block;
+    max-width: 900px;
+    width: 100%;
+    height: 100%;
+    background-color: #b0b2ba;
+}
+
+
+.more {
+    border: none;
+    width: 200px;
+    height: 50px;
+    background-color: #00aa66;
+    text-align: center;
+    cursor: pointer;
+    color: #ffffff;
+    margin: 10px 350px;
+    font-size: 18px;
+}
+
+.more:hover {
+    box-shadow: 0 0 3px 0 #686868;
+}
+
+.more:active {
+    box-shadow: none;
+}
+
+.user {
+    display: table;
+    width: 200px;
+    background-color: #e2e2e2;
+    text-align: center;
+    height: 260px;
+    float: left;
+    margin: 12px;
+}
+
+.user a {
+    color: #666;
+    text-decoration: none;
+}
+
+.user:hover {
+    box-shadow: 0 0 3px 0 #686868;
+}
+
+.img img {
+    width: 198px;
+    height: 198px;
+    border: 1px solid #c7c7c7;
+}
+
+.location {
+    display: block;
+    font-size: 12px;
+}
+
+.status {
+    font-size: 12px;
+}
+
+.follow {
+    margin-top: 0;
+    width: 100%;
+    height: 15px;
+    font-size: 10px;
+    background-color: #00aa66;
+    color: #fff;
+    border: none;
+    cursor: pointer;
+}
+
+.unfollow {
+    width: 100%;
+    height: 15px;
+    font-size: 10px;
+    background-color: #7f0887;
+    color: #fff;
+    border: none;
+    cursor: pointer;
+}
+
+.hide {
+    opacity: 50%;
+    display: table;
+    width: 200px;
+    background-color: #e2e2e2;
+    text-align: center;
+    height: 260px;
+    float: left;
+    margin: 12px;
+}
+.hide a {
+    color: #666;
+    text-decoration: none;
+}
+.preloader {
+    width: 100%;
+    height: 100vh;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
