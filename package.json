@@ -1,8 +1,7 @@
 {
-  "name": "my-firs-app",
+  "name": "social-network-87",
   "version": "0.1.0",
   "private": true,
-  "homepage": "https://hazard-87.github.io/my-firs-app",
   "dependencies": {
     "@testing-library/jest-dom": "^4.2.4",
     "@testing-library/react": "^9.5.0",
