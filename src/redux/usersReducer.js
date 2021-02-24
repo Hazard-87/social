@@ -1,16 +1,23 @@
 import {usersAPI} from "../api/api";
 
-const FOLLOW = 'FOLLOW'
-const UNFOLLOW = 'UNFOLLOW'
-const SET_USERS = 'SET_USERS'
-const SET_MORE_USERS = 'SET_MORE_USERS'
-const SET_СURRENT_PAGE = 'SET_СURRENT_PAGE'
-const SET_TOTAL_PAGE_COUNT = 'SET_TOTAL_PAGE_COUNT'
-const TOGGLE_IS_FETCHING = 'TOGGLE_IS_FETCHING'
-const TOGGLE_IS_FOLLOWING_PROGRESS = 'TOGGLE_IS_FOLLOWING_PROGRESS'
+const FOLLOW = 'FOLLOW',
+    UNFOLLOW = 'UNFOLLOW',
+    SET_USERS = 'SET_USERS',
+    SET_MORE_USERS = 'SET_MORE_USERS',
+    SET_СURRENT_PAGE = 'SET_СURRENT_PAGE',
+    SET_SORT_BY_NAME = 'SET_SORT_BY_NAME',
+    SET_SORT_BY_ID = 'SET_SORT_BY_ID',
+    SET_FILTER = 'SET_FILTER',
+    SET_TOTAL_PAGE_COUNT = 'SET_TOTAL_PAGE_COUNT',
+    TOGGLE_IS_FETCHING = 'TOGGLE_IS_FETCHING',
+    TOGGLE_IS_FOLLOWING_PROGRESS = 'TOGGLE_IS_FOLLOWING_PROGRESS'
+
 let initialState = {
     users: [],
-    pageSize: 8,
+    activeSort: '',
+    sortName: false,
+    sortId: false,
+    pageSize: 30,
     totalPageCount: 0,
     currentPage: 1,
     isFetching: true,
@@ -53,6 +60,52 @@ const usersReducer = (state = initialState, action) => {
         case SET_TOTAL_PAGE_COUNT: {
             return {...state, totalPageCount: action.totalPageCount}
         }
+        case SET_FILTER: {
+            const users = state.users.filter(user=> {
+                return user.name.toLowerCase().indexOf(action.value.toLowerCase()) > -1
+            })
+            return {...state, users: users}
+        }
+        case SET_SORT_BY_NAME: {
+            return {
+                ...state, activeSort: action.item, sortName: action.bool, sortId: false, users: [...state.users].sort((prev, next) => {
+                    if (state.sortName) {
+                        if (prev[action.item] > next[action.item]) {
+                            return -1
+                        } else {
+                            return 1
+                        }
+                    } else {
+                        if (prev[action.item] < next[action.item]) {
+                            return -1
+                        } else {
+                            return 1
+                        }
+                    }
+                    }
+                )
+            }
+        }
+        case SET_SORT_BY_ID: {
+            return {
+                ...state, activeSort: action.item, sortId: action.bool, sortName: false, users: [...state.users].sort((prev, next) => {
+                        if (state.sortId) {
+                            if (prev[action.item] > next[action.item]) {
+                                return -1
+                            } else {
+                                return 1
+                            }
+                        } else {
+                            if (prev[action.item] < next[action.item]) {
+                                return -1
+                            } else {
+                                return 1
+                            }
+                        }
+                    }
+                )
+            }
+        }
         case TOGGLE_IS_FETCHING: {
             return {...state, isFetching: action.isFetching}
         }
@@ -69,12 +122,15 @@ const usersReducer = (state = initialState, action) => {
     }
 }
 
-export const requestUsers = (currentPage, pageSize) => {
+export const requestUsers = (currentPage, pageSize, value) => {
     return async (dispatch) => {
         dispatch(toggleIsFetching(true))
         let data = await usersAPI.getUsers(currentPage, pageSize)
         dispatch(toggleIsFetching(false))
         dispatch(setUsers(data.items))
+        if (value) {
+        dispatch(setFilter(value))
+        }
         dispatch(setTotalPageCount(data.totalCount))
     }
 }
@@ -118,9 +174,13 @@ export const setMoreUsers = (users) => ({type: 'SET_MORE_USERS', users})
 export const setCurrentPage = (currentPage) => ({type: 'SET_СURRENT_PAGE', currentPage})
 export const setTotalPageCount = (totalPageCount) => ({type: 'SET_TOTAL_PAGE_COUNT', totalPageCount})
 export const toggleIsFetching = (isFetching) => ({type: 'TOGGLE_IS_FETCHING', isFetching})
+export const setSortByName = (item, bool, sort) => ({type: 'SET_SORT_BY_NAME', item, bool, sort})
+export const setFilter = (value) => ({type: 'SET_FILTER', value})
+export const setSortById = (item, bool, sort) => ({type: 'SET_SORT_BY_ID', item, bool, sort})
 export const toggleFollowingProgress = (isFetching, userId) => ({
     type: 'TOGGLE_IS_FOLLOWING_PROGRESS',
     isFetching,
     userId
 })
 export default usersReducer;
+

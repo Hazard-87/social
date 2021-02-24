@@ -1,6 +1,6 @@
 import React, { Suspense } from 'react';
-import { withRouter, BrowserRouter, Route } from 'react-router-dom';
-import { connect } from 'react-redux';
+import { withRouter, BrowserRouter as Router, Route } from 'react-router-dom';
+import { connect, useSelector } from 'react-redux';
 import { compose } from 'redux';
 import { initializeApp } from './redux/app-reducer';
 import { withSuspense } from './hoc/withSuspense';
@@ -29,7 +29,7 @@ class App extends React.Component {
       return <Preloader />;
     }
     return (
-      <BrowserRouter>
+      <Router>
         <div className="appWrapper">
           <HeaderContainer />
           <NavContainer />
@@ -43,7 +43,7 @@ class App extends React.Component {
             <Route path="/login" render={() => <Login />} />
           </div>
         </div>
-      </BrowserRouter>
+      </Router>
     );
   }
 }
@@ -53,3 +53,35 @@ const mapStateToProps = (state) => ({
 });
 
 export default compose(withRouter, connect(mapStateToProps, { initializeApp }))(App);
+
+// const App = () => {
+//   const initialized = useSelector((app) => app.initialized);
+
+//   React.useEffect(() => {
+//     initializeApp();
+//   }, []);
+
+//   if (initialized) {
+//     return <Preloader />;
+//   }
+
+//   return (
+//     <Router>
+//       <div className="appWrapper">
+//         <HeaderContainer />
+//         <NavContainer />
+//         <div className=".content">
+//           <Route path="/profile/:userId?" render={withSuspense(ProfileContainer)} />
+//           <Route path="/news" render={() => <Feeds />} />
+//           <Route path="/messages" render={withSuspense(MessagesContainer)} />
+//           <Route path="/music" render={() => <Music />} />
+//           <Route path="/users" render={withSuspense(UsersContainer)} />
+//           <Route path="/settings" render={() => <Settings />} />
+//           <Route path="/login" render={() => <Login />} />
+//         </div>
+//       </div>
+//     </Router>
+//   );
+// };
+
+// export default App;

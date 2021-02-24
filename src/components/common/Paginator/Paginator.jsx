@@ -2,7 +2,7 @@ import React, {useState} from "react";
 import styles from './Paginator.module.css';
 
 const Paginator = (props) => {
-let portionSize = 10
+let portionSize = 5
     let pagesCount = Math.ceil(props.totalPageCount / props.pageSize)
     let pages = []
     for (let i = 1; i <= pagesCount; i++) {

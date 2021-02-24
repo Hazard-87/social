@@ -1,0 +1,25 @@
+.table{
+    /*width: 500px;*/
+    border: 1px solid black;
+}
+.title {
+    color: red;
+    border: 1px solid black;
+    cursor: pointer;
+}
+.active {
+    background-color: #7b7b7b;
+    color: red;
+    border: 1px solid black;
+    cursor: pointer;
+}
+.item {
+    padding: 10px;
+}
+svg {
+    margin-right: 8px;
+    transform: rotate(180deg);
+}
+.rotate {
+    transform: rotate(0);
+}
